@@ -1,0 +1,16 @@
+---
+layout: page
+title : About
+header : About
+group: navigation
+---
+{% include JB/setup %}
+<div id="terms-cont">
+          <ul>
+			{% if site.author.name %}<li>{{ site.author.name }}</li>{% endif %}
+			{% if site.author.github %}<li><a href="https://github.com/{{ site.author.github }}">Github</a></li>{% endif %}
+			{% if site.author.weibo %}<li><a href="http://www.weibo.com/u/{{ site.author.weibo }}">Weibo</a></li>{% endif %}
+			{% if site.author.email %}<li><a href="mailto:{{ site.author.email }}">{{ site.author.email}}</a></li>{% endif %}
+			</ul>
+			
+</div>

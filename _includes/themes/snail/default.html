@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	{% if page.title %}
+    <title>{{ page.title }}</title>
+	{% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
+	{% else %}
+	<title>{{ site.title }}</title>
+	{% if site.description %}<meta name="description" content="{{ site.description }}" />{% endif %}
+	{% endif %}
+
+    <!--meta information-->
+    <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <!-- Enable responsive viewport -->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+	
+    <meta name="author" content="{{ site.author.name }}" />
+    <!-- some css file-->
+    <link rel="stylesheet" href="{{ ASSET_PATH }}/css/jquery.fancybox.css" />
+    <link rel="stylesheet" href="{{ ASSET_PATH }}/css/main.css" />
+    <link rel="stylesheet" href="{{ ASSET_PATH }}/css/pages/journal.css" />
+    <link rel="stylesheet" href="{{ ASSET_PATH }}/css/team.css" />
+    <link rel="stylesheet" href="{{ ASSET_PATH }}/css/static.css" />
+    <link rel="stylesheet" href="{{ ASSET_PATH }}/css/errors.css" />
+    <link rel="stylesheet" href="{{ ASSET_PATH }}/google-code-prettify/prettify.css" />
+	<link rel="stylesheet" type="text/css" href="{{ BASE_PATH }}/style.css" />
+    <link rel="shortcut icon" href="{{ ASSET_PATH }}/img/eating.gif" />
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- atom & rss feed -->
+    <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+    <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed" />
+	{% include JB/analytics %}
+  </head>
+  <body>
+  <noscript><div id="no-js">Please enable JavaScript in your browser to experience {{ HOME_PATH }} fully.</div></noscript>
+  <div id="page-container">
+    <div>
+      <!-- nav information -->
+      <nav>
+        <div id="nav-l"></div>
+        <div id="nav-c">
+          <ul id="nav-list" style="width: 700px;">
+            <li id="home">
+              <a href="{{ HOME_PATH }}">Home</a>
+            </li>
+
+			{% for node in site.pages %} 
+			{% if node.title != null %} 
+			{% if 'navigation' == node.group %} 
+			{% if page.url == node.url %}
+            <li id="{{node.title}}" class="active">
+			<span class="nav-l-active"></span>
+              <a href="{{ BASE_PATH }}{{node.url}}" class="active">{{node.title}}</a>
+			<span class="nav-r-active"></span>
+            </li>
+            {% else %}
+            <li id="{{node.title}}">
+              <a href="{{ BASE_PATH }}{{node.url}}">{{node.title}}</a>
+            </li>
+            {% endif %} 
+			{% endif %} 
+			{% endif %} 
+			{% endfor %} 
+          </ul>
+          <form id="nav-search" method="get" action="{{ site.JB.search_path }}">
+            <div id="search-right-pix">
+              <div id="search-left-pix">
+                <div id="search-center-pix">
+                  <div id="search-icon-pix"></div>
+                  <input name="q" type="text" placeholder="Search" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div id="nav-r"></div>
+      </nav>
+      
+	  <div id="page-content">
+	  <!-- content -->
+	  {{ content }}
+	  </div>
+      <div class="clearboth pagebottom"></div>
+	  
+    </div>
+  </div>
+  <!--footer information-->
+  <footer>
+    <div class="footer-940">
+      <div class="footer-general-info">
+	  © 2015 {{ site.author.name }}.<br />
+      <a class="cc" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">c b n a</a><br />
+	  本作品采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可。
+      <br />
+	  </div>
+      <div class="footer-col-cont">
+        <div class="footer-nav-col">
+          <h4>
+            <a>Categories</a>
+          </h4>
+          <ul>{% assign categories_list = site.categories %} {% include JB/categories_list %}</ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>
+            <a>Pages</a>
+          </h4>
+          <ul>{% assign pages_list = site.pages %} {% assign group = 'navigation' %} {% include JB/pages_list %}</ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>
+            <a>Feed</a>
+          </h4>
+          <ul>
+            <li>
+              <a href="{{ BASE_PATH }}{{ site.JB.atom_path }}">Atom Feed</a>
+            </li>
+            <li>
+              <a href="{{ BASE_PATH }}{{ site.JB.rss_path }}">RSS Feed</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>
+            <a>Share</a>
+          </h4>
+          <ul>
+			{% if site.author.github %}<li><a href="https://github.com/{{ site.author.github }}">Github</a></li>{% endif %}
+			{% if site.author.weibo %}<li><a href="http://www.weibo.com/u/{{ site.author.weibo }}">Weibo</a></li>{% endif %}
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>
+            <a href="{{ site.JB.about_path }}">About Me</a>
+          </h4>
+          <ul>
+			{% if site.author.name %}<li><a href="{{ site.JB.about_path }}">{{ site.author.name }}</a></li>{% endif %}
+			{% if site.author.email %}<li><a href="mailto:{{ site.author.email }}">{{ site.author.email}}</a></li>{% endif %}
+          </ul>
+        </div>
+        <div class="clearboth"></div>
+      </div>
+      <div class="clearboth"></div>
+    </div>
+    <div class="clearboth"></div>
+  </footer>
+  <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="{{ ASSET_PATH }}/js/jquery.min.js"></script> {% if site.auto_loadmore == true %} 
+  <script type="text/javascript" src="{{ ASSET_PATH }}/js/auto_loadmore.js"></script> {% else %} 
+  <script type="text/javascript" src="{{ ASSET_PATH }}/js/loadmore.js"></script> {% endif %} 
+  <script type="text/javascript" src="{{ ASSET_PATH }}/google-code-prettify/prettify.js"></script> 
+  <script type="text/javascript">
+          $(function(){
+                $("pre code").addClass("prettyprint linenums");
+                prettyPrint();
+          });
+  </script>
+  </body>
+</html>

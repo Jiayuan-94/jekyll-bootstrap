@@ -4,16 +4,18 @@ permalink: /:categories/:year/:month/:day/:title
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 highlighter: pygments
+markdown: redcarpet
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Jekyll Bootstrap
-tagline: Site Tagline
+title : Jiayuan's Blog
+tagline: Good day, Commander!
 author :
-  name : Name Lastname
-  email : blah@email.test
-  github : username
+  name : Jiayuan Tian
+  email : tianjiayuan.1994@gmail.com
+  github : Jiayuan-94
+  weibo : 3268777922
   twitter : username
   feedburner : feedname
 
@@ -25,7 +27,42 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://username.github.io
+production_url : http://Jiayuan-94.github.io
+
+# The way of excerpt. There are two options: "teaser" and "truncate_words".
+# "teaser" option: look for the More tag (<!--more-->) and create a teaser from the content that precedes the More tag.
+#                  You must place "<!--more-->" at paragraph in post. The whole content will be displayed in homepage if no More tag found in post.
+# "truncate_words" option: generate an excerpt automatically by selecting the first 20 words of the post. It doesn't work well in some of no-English post.
+#
+excerpt : teaser
+
+# The number of items displayed per page.
+#
+paginate : 5
+
+# The destination of the pagination pages
+#
+paginate_path : "page:num"
+
+search : 
+  provider : gcse
+  
+  # Your Google custom search engine ID
+  #
+  gcse :
+    cx : 011931197008807275241:lvnbwa46ul0
+
+# Set the Sass partials directory, as we're using @imports
+sass:
+  style: :expanded # You might prefer to minify using :compressed
+
+# Use the following plug-ins
+gems:
+  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
+# Whether to enable load more post automatically in homepage. Set 'true' to enable. Set 'false' to disable.
+# You must click the 'load more' button to load more posts when it is set to 'false'.
+#
+auto_loadmore : true
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -69,11 +106,13 @@ JB :
   # These paths are to the main pages Jekyll-Bootstrap ships with.
   # Some JB helpers refer to these paths; change them here if needed.
   #
-  archive_path: /archive.html
+  archive_path : /archive.html
   categories_path : /categories.html
   tags_path : /tags.html
   atom_path : /atom.xml
   rss_path : /rss.xml
+  about_path : /about.html
+  search_path : /search.html
 
   # Settings for comments helper
   # Set 'provider' to the comment provider you want to use.
@@ -82,7 +121,7 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : jekyllbootstrap
+      short_name : jiayuan-94
     livefyre :
       site_id : 123
     intensedebate :
@@ -104,7 +143,7 @@ JB :
     gauges :
         site_id : 'SITE ID'
     google : 
-        tracking_id : 'UA-123-12'
+        tracking_id : 'UA-64999493-1'
     getclicky :
       site_id : 
     mixpanel :

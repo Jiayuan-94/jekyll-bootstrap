@@ -1,0 +1,58 @@
+<div id="page-content">
+	<div class="cont932">
+	<div id="journal-articles-block">
+		<div class="journal-article">
+			<div class="journal-post-info">
+				<div class="journal-cat-box">
+				{% assign categories_list = page.categories %}
+				{% assign category = categories_list.first %}
+				<div class="journal-cat-box">
+				{% if category[0] == null %}
+				<a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category }}-ref" title="{{ category }}">
+				{{ category }}
+				{% else %}
+				<a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category[0] }}-ref" title="{{ category[0] }}">
+				{{ category[0] }}
+				{% endif %}
+				</a>
+				</div>
+				{% assign categories_list = nil %}
+				</div>
+			</div>
+			<div class="journal-body">
+				<h1 class="journal-title">{{ page.title }}<span class="author">{% if page.tagline %}{{page.tagline}}{% endif %}</span>
+				</h1>
+				<span class="the-article">
+				{{ content }}
+				</span>
+				<div class="journal-date">Published {{ page.date | date_to_long_string }}</div>
+				<div class="journal-tags">
+				{% assign tags_list = page.tags %}
+				{% if tags_list.first[0] == null %}
+				{% for tag in tags_list %} 
+				<a class="tag-cont" href="{{ BASE_PATH }}{{ site.JB.tags_path }}#{{ tag }}-ref">
+					<div class="tag-l"></div>
+					<div class="tag-c">{{ tag }}</div>
+					<div class="tag-r"></div>
+				</a>
+				{% endfor %}
+				{% else %}
+				{% for tag in tags_list %} 
+				<a class="tag-cont" href="{{ BASE_PATH }}{{ site.JB.tags_path }}#{{ tag[0] }}-ref">
+					<div class="tag-l"></div>
+					<div class="tag-c">{{ tag[0] }}</div>
+					<div class="tag-r"></div>
+				</a>
+				{% endfor %}
+				{% endif %}
+				{% assign tags_list = nil %}
+				</div>
+			</div>
+		</div>
+		<div class="clearboth"></div>
+	</div>
+</div>
+	<div class="clearboth"></div>
+	{% include JB/comments %}
+	<div class="clearboth"></div>
+</div>
