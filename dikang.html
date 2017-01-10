@@ -1,0 +1,83 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>匿名投票</title>
+	<!-- 引入 Bootstrap -->
+	<link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">    
+</head>
+<script>
+function Item(name,num){
+	this.name = name
+	this.num = num
+}
+var items = new Array();
+function addVoteItem(){
+	var x = document.getElementById("voteItem");
+	for(i=0;i<items.length;i++)
+		if(items[i].name==x.value)return;
+	item = new Item(x.value,0);
+	items.push(item)
+	x = document.getElementById("voteItemsDisplay");
+	s=''
+	for(i=0;i<items.length;i++)
+		s+='<b>'+i+'</b>:'+items[i].name+'</br>';
+	x.innerHTML = s;
+}
+var voteNum=0;
+function startVote(){
+	if(items.length<=0)return;
+	document.getElementById("startVote").disabled=true;
+	document.getElementById("endVote").disabled=false;
+	document.getElementById("addVoteItem").disabled=true;
+	var x = document.getElementById("voteZone");
+	s=''
+	for(i=0;i<items.length;i++){
+		if(i%2==0)
+			s+='<button class="btn btn-lg btn-success" onclick=\"vote('+i+')\">'+items[i].name+'</button>';	
+		else
+			s+='<button class="btn btn-lg btn-primary" onclick=\"vote('+i+')\">'+items[i].name+'</button>';				
+	}
+	x.innerHTML = s;
+	document.getElementById("voteNum").innerHTML=voteNum;
+}
+function endVote(){
+	document.getElementById("startVote").disabled=false;
+	document.getElementById("endVote").disabled=true;
+	document.getElementById("addVoteItem").disabled=false;
+	var x = document.getElementById("voteZone");	
+	s='投票结果:</br>'
+	max = 0;
+	for(i=0;i<items.length;i++){
+		s+=items[i].name+':'+items[i].num+'</br>';
+		items[i].num=0;
+		if(items[max].num<items[i].num)
+			max=i;
+	}
+	s+='</br>得票最高:'+items[max].name;
+	x.innerHTML = s;	
+	voteNum=0;
+	document.getElementById("voteNum").innerHTML=voteNum;
+}
+function vote(id){
+	voteNum+=1;
+	document.getElementById("voteNum").innerHTML=voteNum;
+	items[id].num+=1;
+}
+</script>
+<body>
+	<h1>
+		<input id="voteItem" type="text" value="ccc">
+		<button class="btn btn-lg btn-primary" onclick="addVoteItem()" id="addVoteItem">添加投票项</button>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">投票项</h3>
+			</div>
+			<div class="panel-body" id="voteItemsDisplay"></div>
+		</div>		
+		<button class="btn btn-lg btn-success" id="startVote" onclick="startVote()">开始匿名投票</button>
+		<button class="btn btn-lg btn-danger" id="endVote" disabled="true" onclick="endVote()">结束投票</button>
+		<span id="voteNum" class="label label-warning">0</span>
+		<div id="voteZone" class="alert alert-info" role="alert"></div>
+	</h1>
+</body>
+</html>
