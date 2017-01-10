@@ -4,13 +4,12 @@ title: Dikang
 header: Dikang
 group: navigation
 ---
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <title>匿名投票</title>
+{% include JB/setup %}
+<div id = "dikang-head">
+    <h2>匿名投票</h2>
 	<!-- 引入 Bootstrap -->
 	<link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">    
-</head>
+</div>
 <script>
 function Item(name,num){
 	this.name = name
@@ -70,7 +69,7 @@ function vote(id){
 	items[id].num+=1;
 }
 </script>
-<body>
+<div id = "dikang-body">
 	<h1>
 		<input id="voteItem" type="text" value="ccc">
 		<button class="btn btn-lg btn-primary" onclick="addVoteItem()" id="addVoteItem">添加投票项</button>
@@ -85,5 +84,4 @@ function vote(id){
 		<span id="voteNum" class="label label-warning">0</span>
 		<div id="voteZone" class="alert alert-info" role="alert"></div>
 	</h1>
-</body>
-</html>
+</div>
